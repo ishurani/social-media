@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %} Sign In {% endblock title %}
+
+{% block content %}
+
+          <form method="POST" action="" class="px-md-4 text-dark" >{% csrf_token %}
+
+            <p>{{ form.login }}</p>
+            <p>{{ form.password }}</p>
+            <input type="submit" value="Sign In" class="btn btn-block sign-up-btn">
+          </form>
+
+{% endblock content %}

@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %} Sign In {% endblock title %}
+{% load socialaccount %}
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/verification.css' %}">
+
+<section class="section-1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8 col-md-7">
+                <div class="">
+                    <div class="img-thumbnail p-5 m-md-5 text-center">
+                        <div class="row">
+                            <div class="col">
+                                <img src="{% static 'img/undraw_Login_v483.svg' %}" alt="" class="img">
+                            </div>
+                            <div class="col pt-md-5">
+                                Thank you  for verifiying your account. Please login using the same credentials.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-5 col-sm-6 offset-sm-3 offset-md-0 bg-white">
+                <div class="main-container my-3 text-center py-5">
+                    <h3 class="text-dark px-md-3 pb-2">Sign In</h3>
+                    {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
+                    <form method="POST" class="px-md-4 text-dark">
+                        {% csrf_token %}
+                        <ul id="demo" class="clearfix px-0 my-1">
+                            <li class="">
+                                <label for="id_demo_1" class="">
+                                    <input type="radio" id="id_demo_1" name="demo" value="Individual"><span
+                                    class="px-4 px-lg-5">Individual</span>
+                                </label>
+                            </li>
+                            <li class="">
+                                <label for="id_demo_2" class="">
+                                    <input type="radio" id="id_demo_2" name="demo" value="Corporate"><span
+                                    class="px-4 px-lg-5">Corporate</span>
+                                </label>
+                            </li>
+                        </ul>
+                        <p>{{ form.login }}</p>
+                        <p>{{ form.password }}</p>
+                        <input type="submit" value="Sign In" class="btn btn-block sign-up-btn">
+                    </form>
+                    <div class="px-md-4 pt-2">
+                        <a class="create-one" style="align-content: flex-start;" href="{% url 'accounts:account_reset_password' %}">Forgotten Password?</a>
+                        <a class="create-one offset-md-1" href="{% url 'accounts:account_signup' %}">Create Account</a>
+                        <hr>
+                        <a href="" class="btn btn-block sign-up-google mt-lg-4">
+                            <i class="fa fa-google" aria-hidden="true"></i>
+                            Sign-In with Google
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

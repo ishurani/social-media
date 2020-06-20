@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    {% load static %}
+    <nav class="navbar sticky-top serefe-navbar" style="background-color: #FDF0E9">
+    <a class="navbar-brand py-0" href="{% url 'main:home' %}" style="color: #333333; font-size: 30px;">
+        <img class="serefe-logo" src="{% static 'img/logo/logo_tagline.png' %}" style="height: 60px">
+    </a>
+
+    <div>
+        <ul class="navbar-nav mr-auto">
+            {% if not user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link btn sign-btn py-1 px-3 mr-2 " href="{% url 'account_signup'%}"
+                   style="background-color: #F07867; color: #FFFFFF;display: inline; font-size: 14px;">Join Us
+                </a>
+                <a class="nav-link btn sign-btn py-1 px-3" href="{% url 'account_login'%}?next={{request.path}}"
+                   style="background-color:  #FFFFFF; color: #F07867; display: inline; font-size: 14px;">Sign In
+                </a>
+            </li>
+            {% endif %}
+            {% if user.is_authenticated %}
+                {% if user.is_counseller %}
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="{% url 'main:home'%}"><strong>Dashboard</strong></a>
+                    </li>
+                {% endif %}
+            <li class="nav-item">
+                Hi, {{ user.username }}
+                <a href="/notifications" class="fa fa-bell ml-2 mr-2" style="color: black;text-decoration: none"></a>
+
+                <a class="nav-link btn sign-btn py-1 px-3 d-inline" style="font-size: 14px"
+                   href="{% url 'accounts:logout' %}">Logout</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+{% block content %}
+
+{% endblock %}
+  </body>
+</html>
