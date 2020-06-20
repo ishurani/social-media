@@ -2,44 +2,85 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Social-Media</title>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+
   </head>
   <body>
     {% load static %}
-    <nav class="navbar sticky-top serefe-navbar" style="background-color: #FDF0E9">
-    <a class="navbar-brand py-0" href="{% url 'main:home' %}" style="color: #333333; font-size: 30px;">
-        <img class="serefe-logo" src="{% static 'img/logo/logo_tagline.png' %}" style="height: 60px">
-    </a>
+    <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="{% url 'main:home' %}" id="two">Star Social</a>
 
-    <div>
-        <ul class="navbar-nav mr-auto">
-            {% if not user.is_authenticated %}
-            <li class="nav-item">
-                <a class="nav-link btn sign-btn py-1 px-3 mr-2 " href="{% url 'account_signup'%}"
-                   style="background-color: #F07867; color: #FFFFFF;display: inline; font-size: 14px;">Join Us
-                </a>
-                <a class="nav-link btn sign-btn py-1 px-3" href="{% url 'account_login'%}?next={{request.path}}"
-                   style="background-color:  #FFFFFF; color: #F07867; display: inline; font-size: 14px;">Sign In
-                </a>
-            </li>
-            {% endif %}
-            {% if user.is_authenticated %}
-                {% if user.is_counseller %}
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" href="{% url 'main:home'%}"><strong>Dashboard</strong></a>
-                    </li>
-                {% endif %}
-            <li class="nav-item">
-                Hi, {{ user.username }}
-                <a href="/notifications" class="fa fa-bell ml-2 mr-2" style="color: black;text-decoration: none"></a>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          Feedback
+        </a>
+      </li>
+    </ul>
 
-                <a class="nav-link btn sign-btn py-1 px-3 d-inline" style="font-size: 14px"
-                   href="{% url 'accounts:logout' %}">Logout</a>
-            </li>
-            {% endif %}
+    {% if user.is_authenticated %}
+
+   <ul class="navbar-nav navbar-right">
+
+       <li>
+         <li class="nav-item" style="color:white">
+             Hi, {{ user.username }}</li>
+
+        <a href="#" style="color:white">Profile</a>
+        </li>&nbsp;&nbsp;&nbsp;
+
+      <li class="nav-item active">
+      <li class="dropdown"><a class="dropdown-toggle" id="link" data-toggle="dropdown" href="#">Group <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li id="post1"><a href="#">All Groups</a></li>
+          <li id="post1"><a href="#">New Group</a></li>
         </ul>
-    </div>
+      </li></li>
+      <li class="dropdown"><a class="dropdown-toggle" id="link" data-toggle="dropdown" href="#">Post <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li id="post1"><a href="#">All Posts</a></li>
+          <li id="post1"><a href="#">New Post</a></li>
+        </ul>
+      </li>
+      <li>
+      <a class="nav-link btn sign-btn py-1 px-3 d-inline" style="font-size: 14px"
+             href="{% url 'accounts:logout' %}">Logout</a>
+      </li>
+    </ul>
+      {% else %}
+     <ul class="navbar-nav navbar-right">
+      <li class="nav-item active">
+        <a class="nav-link" href="#" id="one">
+        Groups
+          </a>
+      </li>
+        <li class="nav-item active">
+        <a class="nav-link" href="{% url "account_login"%}" id="one">
+         Login
+          </a>
+      </li>
+        <li class="nav-item active">
+        <a class="nav-link" href="{% url "account_signup"%}" id="one">
+         Sign up
+          </a>
+      </li>
+    </ul>
+    {% endif %}
+  </div>
 </nav>
+
 {% block content %}
 
 {% endblock %}
