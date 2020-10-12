@@ -23,7 +23,7 @@
     <br>
      <h1> Posts:</h1>
         {% if not group.posts.count %}
-            <h2> No posts yet</h2>
+            <h2> No posts yet in this group!</h2>
         {% else %}
             {% for post in group.posts.all%}
                 {% include "posts/_post.html"%}

@@ -7,4 +7,4 @@ def profile(request):
     return render(request,'profile.html', {'current_user': current_user})
 
 def verification(request):
-    return render(request,'home.html')
+    return render(request,'account/verification-confirmation.html')

@@ -6,7 +6,7 @@ from django.utils.text import slugify
 from django.urls import reverse
 
 # Create your models here.
-import misaka
+#import misaka
 # from django.contrib.auth.models import settings.AUTH_USER_MODEL
 from django.conf import settings
 
@@ -17,7 +17,6 @@ class Group(models.Model):
     name=models.CharField(max_length=250,unique=True)
     slug=models.SlugField(allow_unicode=True,unique=True)
     description=models.TextField(blank=True,default='')
-    description_html=models.TextField(editable=False,default='',blank=True)
     members=models.ManyToManyField(settings.AUTH_USER_MODEL,through="Groupmember")
 
     def __str__(self):
@@ -25,7 +24,6 @@ class Group(models.Model):
 
     def save(self,*args,**kwargs):
         self.slug=slugify(self.name)
-        self.description_html=misaka.html(self.description)
         super().save(*args,**kwargs)
 
     def get_absolute_url(self):
